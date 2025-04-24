@@ -6,16 +6,16 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class NoteTest extends DuskTestCase
+class EditNotesTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
-     * @group Note
+     * @group EditNotes
      */
     public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/') // mengunjungi halaman web utama
+            $browser->visit('/')
                     ->assertSee('Log in') // melihat teks Log In
                     ->clickLink('Log in') // menekan tautan Log in
                     ->assertPathIs('/login') // memastikan url setelah menekan tautan sebelumnya
@@ -25,10 +25,9 @@ class NoteTest extends DuskTestCase
                     ->assertPathIs('/dashboard') // memastikan url mengarah ke dashboard
                     ->clickLink('Notes') // menekan tautan notes
                     ->assertPathIs('/notes') // memastikan url setelah menekan tautan sebelumnya
-                    ->clickLink('Create Note') // klik link create note untuk membuat notes
-                    ->type('title', 'Modul 3') // mengisi input yang memiliki atribut title
-                    ->type('description', 'banyak banget') // mengisi input yang memiliki atribut description
-                    ->press('CREATE'); // menekan tombol submit dari form
+                    ->clickLink('Edit') // klik link "Notes" untuk halaman edit
+                    ->type('title', 'Modul 3 PPL') // mengisi input dengan perubahan baru
+                    ->press('UPDATE'); // menekan tombol submit dari form
         });
     }
 }

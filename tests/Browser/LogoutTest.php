@@ -6,16 +6,16 @@ use Tests\DuskTestCase;
 use Laravel\Dusk\Browser;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class NoteTest extends DuskTestCase
+class LogoutTest extends DuskTestCase
 {
     /**
      * A Dusk test example.
-     * @group Note
+     * @group Logout
      */
     public function testExample(): void
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/') // mengunjungi halaman web utama
+            $browser->visit('/')
                     ->assertSee('Log in') // melihat teks Log In
                     ->clickLink('Log in') // menekan tautan Log in
                     ->assertPathIs('/login') // memastikan url setelah menekan tautan sebelumnya
@@ -23,12 +23,9 @@ class NoteTest extends DuskTestCase
                     ->type('password', 'sarahlukir') // mengisi input yang memiliki atribut name password
                     ->press('LOG IN') // menekan tombol submit dari form
                     ->assertPathIs('/dashboard') // memastikan url mengarah ke dashboard
-                    ->clickLink('Notes') // menekan tautan notes
-                    ->assertPathIs('/notes') // memastikan url setelah menekan tautan sebelumnya
-                    ->clickLink('Create Note') // klik link create note untuk membuat notes
-                    ->type('title', 'Modul 3') // mengisi input yang memiliki atribut title
-                    ->type('description', 'banyak banget') // mengisi input yang memiliki atribut description
-                    ->press('CREATE'); // menekan tombol submit dari form
+                    ->assertSee('Dashboard') // menampilkan "Welcome" setelah login berhasil
+                    ->press('Sarah Luki Raihani') // menekan akun pengguna "Sarah Luki Raihani" untuk memilih logout
+                    ->clickLink('Log Out'); // mengklik link "Log Out" untuk halaman logout
         });
     }
 }
